@@ -7,3 +7,8 @@ void Network::toString() {
 		printf("Biases: %s\n", biases[i].toString().c_str());//.c_str() needed to convert string to const char* for printf
 	}
 }
+
+__global__ void Network::forward(Vector* dev_weights, Vector* dev_biases) {
+	//forward pass implementation
+
+}

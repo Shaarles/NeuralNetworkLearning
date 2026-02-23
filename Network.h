@@ -51,7 +51,10 @@ public:
 		cudaFreeHost(weights);
 		cudaFreeHost(biases);
 	}
-
 	void toString();
+
+	__global__ void forward(Vector* dev_weights, Vector* dev_biases);
+
+
 
 };
