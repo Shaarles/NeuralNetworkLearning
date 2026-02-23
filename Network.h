@@ -3,7 +3,7 @@
 #include "device_launch_parameters.h"
 #include <cstdio>
 #include <cstdlib>
-#include "Network.h"
+#include "Vector.cpp"
 using namespace std;
 
 class Network {
@@ -23,12 +23,19 @@ public:
 		this->dimensions = dimensions;
 
 		//allocating host memory for weights and biases
-		cudaMallocHost(&weights, size * sizeof(Vector));
-		cudaMallocHost(&biases, size * sizeof(Vector));
+		cudaMallocHost(&weights, size * sizeof(new Vector(size)));
+		cudaMallocHost(&biases, size * sizeof(new Vector(size)));
 
 		//allocating device memory for weights and biases
-		cudaMalloc(&dev_weights, size * sizeof(Vector));
-		cudaMalloc(&dev_biases, size * sizeof(Vector));
+		cudaMalloc(&dev_weights, size * sizeof(new Vector(size)));
+		cudaMalloc(&dev_biases, size * sizeof(new Vector(size)));
+
+		//copying data from host to device
+
+		cudaMemcpy(dev_weights, weights, size * sizeof(new Vector(size)), cudaMemcpyHostToDevice);
+		cudaMemcpy(dev_biases, biases, size * sizeof(new Vector(size)), cudaMemcpyHostToDevice);
+
+
 
 		for (int i = 0; i < size; i++) {
 			weights[i] = Vector(dimensions[i]); //no delete and stuff needed; stack object
@@ -44,5 +51,7 @@ public:
 		cudaFreeHost(weights);
 		cudaFreeHost(biases);
 	}
+
+	void toString();
 
 };
