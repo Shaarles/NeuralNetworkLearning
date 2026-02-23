@@ -1,6 +1,7 @@
 ﻿#include "Vecteur.cpp"
 #include "Network.h"
 
+#define main Network
 
 class Network{
 private:
@@ -24,3 +25,6 @@ public:
 	}
 
 };
+int main() {
+	return 0;
+}
