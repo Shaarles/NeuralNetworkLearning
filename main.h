@@ -1,1 +1,6 @@
 #pragma once
+#include "stdio.h"
+#include "stdlib.h"
+#include "Network.cpp"
+
+using namespace std;

@@ -82,11 +82,11 @@
   <ItemGroup>
     <ClInclude Include="main.h" />
     <ClInclude Include="Network.h" />
-    <ClInclude Include="Vecteur.h" />
+    <ClInclude Include="Vector.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="Vecteur.cpp" />
+    <ClCompile Include="Vector.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

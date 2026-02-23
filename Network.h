@@ -3,4 +3,5 @@
 #include "device_launch_parameters.h"
 #include <stdio.h>
 #include <stdlib.h>
+#include "Network.h"
 using namespace std;

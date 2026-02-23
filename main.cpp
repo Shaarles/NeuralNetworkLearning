@@ -1,0 +1,9 @@
+#include "main.h"
+
+int main() {
+	int size = 3;
+	int dimensions[] = { 2, 3, 1 };
+	Network network(size, dimensions);
+	delete(&network);
+	return 0;
+}

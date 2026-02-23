@@ -1,4 +1,4 @@
-#include "Vecteur.h"
+#include "Vector.h"
 
 
 class Vector {
@@ -16,7 +16,3 @@ class Vector {
 			free(this->values);
 		}
 };
-
-int main() {
-	return 0;
-}
