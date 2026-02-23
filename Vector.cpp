@@ -1,18 +1,14 @@
 #include "Vector.h"
 
-
-class Vector {
-	private:
-		int size;
-		float* values;
-
-	public:
-		Vector(int size) {
-			this->size = size;
-			this->values = (float*)malloc(size*sizeof(float));
+string Vector::toString() {
+	string result = "[";
+	for (int i = 0; i < size; i++) {
+		result += to_string(values[i]);
+		if (i != size - 1) {
+			result += ", ";
 		}
+	}
+	result += "]";
+	return result;
+}
 
-		~Vector() {
-			free(this->values);
-		}
-};
