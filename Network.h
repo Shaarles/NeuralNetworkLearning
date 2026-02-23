@@ -10,11 +10,12 @@ class Network {
 private:
 	int size;
 	int* dimensions;
+	int total_dimensions;
 	Vector* weights;
 	Vector* biases;
 
-	Vector* dev_weights;
-	Vector* dev_biases;
+	float* dev_weights;
+	float* dev_biases;
 
 public:
 
@@ -22,27 +23,32 @@ public:
 		this->size = size;
 		this->dimensions = dimensions;
 
+		for(int i = 0; i < size; i++) {
+			total_dimensions += dimensions[i];
+			}
+
 		//allocating host memory for weights and biases
-		cudaMallocHost(&weights, size * sizeof(new Vector(size)));
-		cudaMallocHost(&biases, size * sizeof(new Vector(size)));
+		cudaMallocHost(&weights, size * sizeof(Vector));
+		cudaMallocHost(&biases, size * sizeof(Vector));
 
 		//allocating device memory for weights and biases
-		cudaMalloc(&dev_weights, size * sizeof(new Vector(size)));
-		cudaMalloc(&dev_biases, size * sizeof(new Vector(size)));
+		cudaMalloc(&dev_weights, total_dimensions *sizeof(float));
+		cudaMalloc(&dev_biases, total_dimensions * sizeof(float));
 
-		//copying data from host to device
-
-		cudaMemcpy(dev_weights, weights, size * sizeof(new Vector(size)), cudaMemcpyHostToDevice);
-		cudaMemcpy(dev_biases, biases, size * sizeof(new Vector(size)), cudaMemcpyHostToDevice);
 
 
 
 		for (int i = 0; i < size; i++) {
-			weights[i] = Vector(dimensions[i]); //no delete and stuff needed; stack object
+
+			srand(time({}));
+			weights[i] = Vector(dimensions[i]);
 			weights[i].randomint();
 			biases[i] = Vector(dimensions[i]);
 			biases[i].randomint();
 		}
+
+		//copying data from host to device
+
 	}
 
 	~Network() {
@@ -54,7 +60,6 @@ public:
 	void toString();
 
 	__global__ void forward(Vector* dev_weights, Vector* dev_biases);
-
 
 
 };
